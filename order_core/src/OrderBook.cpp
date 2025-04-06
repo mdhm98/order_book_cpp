@@ -2,7 +2,7 @@
 #include <algorithm>
 
 OrderBook::OrderBook(const std::string& symbol) {
-	this->symbol_;
+	this->symbol_ = symbol;
 }
 
 
@@ -74,7 +74,7 @@ void OrderBook::matchOrder(const Order& incomingOrder) {
                     << "Buy "
                     << matchQty << " @ " << priceLevel.getPrice()
                     << " (with " << restingOrder.getId().value << ")\n";
-                int remainderQty = restingOrder.getQuantity() - matchQty;
+                double remainderQty = restingOrder.getQuantity() - matchQty;
                 restingOrder.setQuantity(remainderQty);
                 quantityToMatch -= matchQty;
 
@@ -83,6 +83,9 @@ void OrderBook::matchOrder(const Order& incomingOrder) {
                 }
                 else {
                     ++i;
+                }
+                if (quantityToMatch <= 0) {
+                    break;
                 }
             }
 
@@ -114,7 +117,7 @@ void OrderBook::matchOrder(const Order& incomingOrder) {
                     << "Sell "
                     << matchQty << " @ " << priceLevel.getPrice()
                     << " (with " << restingOrder.getId().value << ")\n";
-                int remainderQty = restingOrder.getQuantity() - matchQty;
+                double remainderQty = restingOrder.getQuantity() - matchQty;
                 restingOrder.setQuantity(remainderQty);
                 quantityToMatch -= matchQty;
 
@@ -124,12 +127,29 @@ void OrderBook::matchOrder(const Order& incomingOrder) {
                 else {
                     ++i;
                 }
+
+                if (quantityToMatch <= 0) {
+                    break;
+                }
             }
 
             if (priceLevel.getOrders().empty()) {
                 it = bookSide.erase(it);
             }
 
+        }
+    }
+    // If any quantity remains unmatched, re-add the order to the book
+    if (quantityToMatch > 0) {
+        Order updatedOrder = incomingOrder;
+        updatedOrder.setQuantity(quantityToMatch);
+        if (auto it = ownSide.find(incomingOrder.getPrice()); it != ownSide.end()) {
+            it->second.addOrder(updatedOrder);
+        }
+        else {
+            PriceLevel level(incomingOrder.getPrice());
+            level.addOrder(updatedOrder);
+            ownSide.insert({ incomingOrder.getPrice(), level });
         }
     }
 }

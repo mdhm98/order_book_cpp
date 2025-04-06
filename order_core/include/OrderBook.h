@@ -1,3 +1,5 @@
+#pragma once
+
 #include <boost/container/flat_map.hpp>
 #include <boost/unordered/unordered_flat_map.hpp>
 #include <vector>

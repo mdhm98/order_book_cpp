@@ -1,5 +1,4 @@
-#ifndef PRICE_LEVEL
-#define PRICE_LEVEL
+#pragma once
 
 #include "Order.h"
 #include <vector>
@@ -25,4 +24,3 @@ public:
     std::vector<Order>& getOrders() { return orders_; }
 };
 
-#endif

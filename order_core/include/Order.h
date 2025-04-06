@@ -1,6 +1,5 @@
 // Order.h
-#ifndef ORDER
-#define ORDER
+#pragma once
 
 #include <map>
 #include <string>
@@ -59,4 +58,3 @@ private:
     std::string symbol_;
 };
 
-#endif // ORDER

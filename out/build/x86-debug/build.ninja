@@ -144,14 +144,6 @@ build order_core\CMakeFiles\main_exe.dir\src\Main.cpp.obj: CXX_COMPILER__main_ex
   TARGET_COMPILE_PDB = order_core\CMakeFiles\main_exe.dir\
   TARGET_PDB = order_core\main_exe.pdb
 
-build order_core\CMakeFiles\main_exe.dir\src\PriceLevel.cpp.obj: CXX_COMPILER__main_exe_unscanned_Debug C$:\Users\muhdh\Source\Repos\order_book_cpp\order_core\src\PriceLevel.cpp || cmake_object_order_depends_target_main_exe
-  FLAGS = /DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Ob0 /Od /RTC1 -std:c++20 -ZI
-  INCLUDES = -IC:\boost_1_82_0 -IC:\Users\muhdh\Source\Repos\order_book_cpp\order_core\include
-  OBJECT_DIR = order_core\CMakeFiles\main_exe.dir
-  OBJECT_FILE_DIR = order_core\CMakeFiles\main_exe.dir\src
-  TARGET_COMPILE_PDB = order_core\CMakeFiles\main_exe.dir\
-  TARGET_PDB = order_core\main_exe.pdb
-
 
 # =============================================================================
 # Link build statements for EXECUTABLE target main_exe
@@ -160,7 +152,7 @@ build order_core\CMakeFiles\main_exe.dir\src\PriceLevel.cpp.obj: CXX_COMPILER__m
 #############################################
 # Link the executable order_core\main_exe.exe
 
-build order_core\main_exe.exe: CXX_EXECUTABLE_LINKER__main_exe_Debug order_core\CMakeFiles\main_exe.dir\src\Main.cpp.obj order_core\CMakeFiles\main_exe.dir\src\PriceLevel.cpp.obj | order_core\order_core.lib || order_core\order_core.lib
+build order_core\main_exe.exe: CXX_EXECUTABLE_LINKER__main_exe_Debug order_core\CMakeFiles\main_exe.dir\src\Main.cpp.obj | order_core\order_core.lib || order_core\order_core.lib
   FLAGS = /DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Ob0 /Od /RTC1 -ZI
   LINK_FLAGS = /machine:X86 /debug /INCREMENTAL /subsystem:console
   LINK_LIBRARIES = order_core\order_core.lib  kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib

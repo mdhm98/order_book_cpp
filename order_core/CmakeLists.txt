@@ -14,13 +14,13 @@ file(GLOB_RECURSE SOURCE_FILES
 )
 
 # Add the library
-add_library(${LIB_NAME} ${SOURCE_FILES} "src/PriceLevel.cpp")
+add_library(${LIB_NAME} ${SOURCE_FILES})
 
 # Include header files
 target_include_directories(${LIB_NAME} PRIVATE "${CMAKE_CURRENT_SOURCE_DIR}/include")
 
 # Create the executable
-add_executable(main_exe "${CMAKE_CURRENT_SOURCE_DIR}/src/Main.cpp" "src/PriceLevel.cpp")
+add_executable(main_exe "${CMAKE_CURRENT_SOURCE_DIR}/src/Main.cpp")
 
 target_include_directories(main_exe PRIVATE "${CMAKE_CURRENT_SOURCE_DIR}/include")
 

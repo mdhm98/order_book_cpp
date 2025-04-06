@@ -16,7 +16,7 @@ void PriceLevel::addOrder(const Order& order) {
 void PriceLevel::removeOrder(const Order::OrderId& id) {
     auto it = orderIndexMap_.find(id);
     if (it == orderIndexMap_.end()) {
-        throw std::runtime_error("Order not found");
+        throw std::runtime_error("Order not found with ID: " + std::to_string(id.value));
     }
 
     // Move the last order to the position of the removed order
