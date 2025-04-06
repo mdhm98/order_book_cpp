@@ -9,13 +9,26 @@ if (POLICY CMP0141)
   set(CMAKE_MSVC_DEBUG_INFORMATION_FORMAT "$<IF:$<AND:$<C_COMPILER_ID:MSVC>,$<CXX_COMPILER_ID:MSVC>>,$<$<CONFIG:Debug,RelWithDebInfo>:EditAndContinue>,$<$<CONFIG:Debug,RelWithDebInfo>:ProgramDatabase>>")
 endif()
 
-project ("low-latency")
+project (order_book_cpp)
 
-# Add source to this project's executable.
-add_executable (low-latency "low-latency.cpp" "low-latency.h")
+set(CMAKE_CXX_STANDARD 20) 
+set(CMAKE_CXX_STANDARD_REQUIRED YES)
 
-if (CMAKE_VERSION VERSION_GREATER 3.12)
-  set_property(TARGET low-latency PROPERTY CXX_STANDARD 20)
+set(BOOST_ROOT "C:/boost_1_82_0")
+set(Boost_NO_SYSTEM_PATHS TRUE)
+
+
+# Find Boost
+find_package(Boost REQUIRED)
+
+# Check if Boost was found
+if(Boost_FOUND)
+    message(STATUS "Boost found: ${Boost_INCLUDE_DIRS}")
+    include_directories(${Boost_INCLUDE_DIRS})
+else()
+    message(FATAL_ERROR "Boost not found!")
 endif()
 
-# TODO: Add tests and install targets if needed.
+add_subdirectory(order_core)
+
+

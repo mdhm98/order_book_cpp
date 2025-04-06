@@ -1,0 +1,29 @@
+cmake_minimum_required(VERSION 3.8)
+
+set(LIB_NAME order_core)
+
+# Collect header files (not needed for add_executable, but useful for IDEs)
+file(GLOB_RECURSE HEADER_FILES
+    "${CMAKE_CURRENT_SOURCE_DIR}/include/*.h"
+    "${CMAKE_CURRENT_SOURCE_DIR}/include/*.hpp"
+)
+
+# Collect source files
+file(GLOB_RECURSE SOURCE_FILES
+    "${CMAKE_CURRENT_SOURCE_DIR}/src/*.cpp"
+)
+
+# Add the library
+add_library(${LIB_NAME} ${SOURCE_FILES} "src/PriceLevel.cpp")
+
+# Include header files
+target_include_directories(${LIB_NAME} PRIVATE "${CMAKE_CURRENT_SOURCE_DIR}/include")
+
+# Create the executable
+add_executable(main_exe "${CMAKE_CURRENT_SOURCE_DIR}/src/Main.cpp" "src/PriceLevel.cpp")
+
+target_include_directories(main_exe PRIVATE "${CMAKE_CURRENT_SOURCE_DIR}/include")
+
+
+# Link the executable with the library
+target_link_libraries(main_exe PRIVATE ${LIB_NAME})
